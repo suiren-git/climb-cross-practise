@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>クライムクロス（2回目）学習帳</title>
+    <meta name="description" content="テキストテキストテキスト" />
+    <meta name="keywords" content="キーワード記載" />
+    <link rel="icon" href="">
+    <link href="../../css/reset.css" rel="stylesheet" />
+    <link href="../../css/climb-cross/style.css" rel="stylesheet" />
+    <!--javascript-->
+    <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script defer src="../../js/climb-cross/dev-script.js"></script>
+</head>
+
+<body>
+    <header>
+    <h1>クライムクロス2回目学習用クソアプリ</h1>
+    </header>
+    <main class="content">
+    <section class="generate">
+    <h2>クライムクロス2回目発動時</h2>
+    <button class="generate-button" id="generateBtn">表示</button>
+    <div class="generate-container">
+    <div class="container__item">青ドーナツ範囲</div>
+    <div class="container__item">予兆 1回目</div>
+    <div class="container__item">予兆 2回目</div>
+    <div class="container__item" id="generate01">
+        <p class="label">----</p>
+    </div>
+    <div class="container__item" id="generate02">
+        <div class="shape"></div>
+        <p class="label">----</p>
+    </div>
+    <div class="container__item" id="generate03">
+        <div class="shape"></div>
+        <p class="label">----</p>
+    </div>
+    <div class="container__item">
+        <select class="positionselect" id="positionSelect">
+            <option value="MT">MT</option>
+            <option value="ST">ST</option>
+            <option value="H1">H1</option>
+            <option value="H2">H2</option>
+            <option value="D1">D1</option>
+            <option value="D2">D2</option>
+            <option value="D3">D3</option>
+            <option value="D4">D4</option>
+        </select>
+
+        <svg width="200" height="200" viewBox="0 0 200 200">
+            <!-- 円グラフを中央に配置 -->
+            <g transform="translate(100,100)">
+        
+                <!-- 外側の円グラフ（半径90）-->
+                <circle cx="0" cy="0" r="90" fill="white" stroke="#333" stroke-width="1" />
+                <g fill="none" stroke="#333" stroke-width="1">
+                    <line x1="0" y1="-90" x2="0" y2="-50" /> <!-- 上 -->
+                    <line x1="63.64" y1="-63.64" x2="35.36" y2="-35.36" /> <!-- 右上 -->
+                    <line x1="90" y1="0" x2="50" y2="0" /> <!-- 右 -->
+                    <line x1="63.64" y1="63.64" x2="35.36" y2="35.36" /> <!-- 右下 -->
+                    <line x1="0" y1="90" x2="0" y2="50" /> <!-- 下 -->
+                    <line x1="-63.64" y1="63.64" x2="-35.36" y2="35.36" /> <!-- 左下 -->
+                    <line x1="-90" y1="0" x2="-50" y2="0" /> <!-- 左 -->
+                    <line x1="-63.64" y1="-63.64" x2="-35.36" y2="-35.36" /> <!-- 左上 -->
+                </g>
+        
+                <!-- 内側の円グラフ（半径50）-->
+                <circle cx="0" cy="0" r="50" fill="white" stroke="#333" stroke-width="1" />
+                <g fill="none" stroke="#333" stroke-width="1">
+                    <line x1="0" y1="-50" x2="0" y2="0" /> <!-- 上 -->
+                    <line x1="35.36" y1="-35.36" x2="0" y2="0" /> <!-- 右上 -->
+                    <line x1="50" y1="0" x2="0" y2="0" /> <!-- 右 -->
+                    <line x1="35.36" y1="35.36" x2="0" y2="0" /> <!-- 右下 -->
+                    <line x1="0" y1="50" x2="0" y2="0" /> <!-- 下 -->
+                    <line x1="-35.36" y1="35.36" x2="0" y2="0" /> <!-- 左下 -->
+                    <line x1="-50" y1="0" x2="0" y2="0" /> <!-- 左 -->
+                    <line x1="-35.36" y1="-35.36" x2="0" y2="0" /> <!-- 左上 -->
+                </g>
+                <!-- ポジション -->
+                <text id="positionLabel" class="position-name position-name--blue" x="-18" y="-37">MT</text>
+            </g>
+        </svg>
+    </div>
+    </div>
+    </section>
+
+    <section class="answer">
+    <h2>回答欄</h2>
+    <div class="answer-container">
+        <div class="answer-container__item">
+        <label>1回目</label>
+        <input type="radio" name="div1" value="外" checked="checked"> 外
+        <input type="radio" name="div1" value="中"> 中
+        <input type="radio" name="div1" value="動かない"> 動かない
+        <p id="answer01">結果： -</p>
+        <svg width="200" height="200" viewBox="0 0 200 200">
+            <!-- 円グラフを中央に配置 -->
+            <g transform="translate(100,100)">
+        
+                <!-- 外側の円グラフ（半径90）-->
+                <circle cx="0" cy="0" r="90" fill="white" stroke="#333" stroke-width="1" />
+                    <g fill="none" stroke="#333" stroke-width="1">
+                        <line x1="0" y1="-90" x2="0" y2="-50" /> <!-- 上 -->
+                        <line x1="63.64" y1="-63.64" x2="35.36" y2="-35.36" /> <!-- 右上 -->
+                        <line x1="90" y1="0" x2="50" y2="0" /> <!-- 右 -->
+                        <line x1="63.64" y1="63.64" x2="35.36" y2="35.36" /> <!-- 右下 -->
+                        <line x1="0" y1="90" x2="0" y2="50" /> <!-- 下 -->
+                        <line x1="-63.64" y1="63.64" x2="-35.36" y2="35.36" /> <!-- 左下 -->
+                        <line x1="-90" y1="0" x2="-50" y2="0" /> <!-- 左 -->
+                        <line x1="-63.64" y1="-63.64" x2="-35.36" y2="-35.36" /> <!-- 左上 -->
+                        <!-- 塗りフィルター -->
+                        <path class="svg-fill" id="outsvg-fill-01" d="" fill="#CD5C5C" fill-opacity="0.5"></path>
+                    </g>
+          
+                <!-- 内側の円グラフ（半径50）-->
+                <circle cx="0" cy="0" r="50" fill="white" stroke="#333" stroke-width="1" />
+                    <g fill="none" stroke="#333" stroke-width="1">
+                        <line x1="0" y1="-50" x2="0" y2="0" /> <!-- 上 -->
+                        <line x1="35.36" y1="-35.36" x2="0" y2="0" /> <!-- 右上 -->
+                        <line x1="50" y1="0" x2="0" y2="0" /> <!-- 右 -->
+                        <line x1="35.36" y1="35.36" x2="0" y2="0" /> <!-- 右下 -->
+                        <line x1="0" y1="50" x2="0" y2="0" /> <!-- 下 -->
+                        <line x1="-35.36" y1="35.36" x2="0" y2="0" /> <!-- 左下 -->
+                        <line x1="-50" y1="0" x2="0" y2="0" /> <!-- 左 -->
+                        <line x1="-35.36" y1="-35.36" x2="0" y2="0" /> <!-- 左上 -->
+                        <!-- 塗りフィルター -->
+                        <path class="svg-fill" id="insvg-fill-01" d="" fill="#CD5C5C" fill-opacity="0.5"></path>
+                    </g>
+                <!-- ポジション -->
+                <text id="positionLabelAns01" class="position-name position-name--blue" x="-18" y="-37">MT</text>
+            </g>
+        </svg>
+    </div>
+    <div class="answer-container__item">
+        <label>2回目</label>
+        <input type="radio" name="div2" value="外" checked="checked"> 外
+        <input type="radio" name="div2" value="中"> 中
+        <p id="answer02">結果： -</p>
+        <svg width="200" height="200" viewBox="0 0 200 200">
+            <!-- 円グラフを中央に配置 -->
+            <g transform="translate(100,100)">
+        
+                <!-- 外側の円グラフ（半径90）-->
+                <circle cx="0" cy="0" r="90" fill="white" stroke="#333" stroke-width="1" />
+                    <g fill="none" stroke="#333" stroke-width="1">
+                        <line x1="0" y1="-90" x2="0" y2="-50" /> <!-- 上 -->
+                        <line x1="63.64" y1="-63.64" x2="35.36" y2="-35.36" /> <!-- 右上 -->
+                        <line x1="90" y1="0" x2="50" y2="0" /> <!-- 右 -->
+                        <line x1="63.64" y1="63.64" x2="35.36" y2="35.36" /> <!-- 右下 -->
+                        <line x1="0" y1="90" x2="0" y2="50" /> <!-- 下 -->
+                        <line x1="-63.64" y1="63.64" x2="-35.36" y2="35.36" /> <!-- 左下 -->
+                        <line x1="-90" y1="0" x2="-50" y2="0" /> <!-- 左 -->
+                        <line x1="-63.64" y1="-63.64" x2="-35.36" y2="-35.36" /> <!-- 左上 -->
+                        <!-- 塗りフィルター -->
+                        <path class="svg-fill" id="outsvg-fill-02" d="" fill="#CD5C5C" fill-opacity="0.5"></path>
+                    </g>
+          
+                <!-- 内側の円グラフ（半径50）-->
+                <circle cx="0" cy="0" r="50" fill="white" stroke="#333" stroke-width="1" />
+                    <g fill="none" stroke="#333" stroke-width="1">
+                        <line x1="0" y1="-50" x2="0" y2="0" /> <!-- 上 -->
+                        <line x1="35.36" y1="-35.36" x2="0" y2="0" /> <!-- 右上 -->
+                        <line x1="50" y1="0" x2="0" y2="0" /> <!-- 右 -->
+                        <line x1="35.36" y1="35.36" x2="0" y2="0" /> <!-- 右下 -->
+                        <line x1="0" y1="50" x2="0" y2="0" /> <!-- 下 -->
+                        <line x1="-35.36" y1="35.36" x2="0" y2="0" /> <!-- 左下 -->
+                        <line x1="-50" y1="0" x2="0" y2="0" /> <!-- 左 -->
+                        <line x1="-35.36" y1="-35.36" x2="0" y2="0" /> <!-- 左上 -->
+                        <!-- 塗りフィルター -->
+                        <path class="svg-fill" id="insvg-fill-02" d="" fill="#CD5C5C" fill-opacity="0.5"></path>
+                    </g>
+                <!-- ポジション -->
+                <text id="positionLabelAns02" class="position-name position-name--blue" x="-18" y="-37">MT</text>
+            </g>
+        </svg>
+    </div>
+    <div class="answer-container__item">
+        <label>3回目</label>
+        <input type="radio" name="div3" value="外" checked="checked"> 外
+        <input type="radio" name="div3" value="中"> 中
+        <p id="answer03">結果： -</p>
+        <svg width="200" height="200" viewBox="0 0 200 200">
+            <!-- 円グラフを中央に配置 -->
+            <g transform="translate(100,100)">
+        
+                <!-- 外側の円グラフ（半径90）-->
+                <circle cx="0" cy="0" r="90" fill="white" stroke="#333" stroke-width="1" />
+                    <g fill="none" stroke="#333" stroke-width="1">
+                        <line x1="0" y1="-90" x2="0" y2="-50" /> <!-- 上 -->
+                        <line x1="63.64" y1="-63.64" x2="35.36" y2="-35.36" /> <!-- 右上 -->
+                        <line x1="90" y1="0" x2="50" y2="0" /> <!-- 右 -->
+                        <line x1="63.64" y1="63.64" x2="35.36" y2="35.36" /> <!-- 右下 -->
+                        <line x1="0" y1="90" x2="0" y2="50" /> <!-- 下 -->
+                        <line x1="-63.64" y1="63.64" x2="-35.36" y2="35.36" /> <!-- 左下 -->
+                        <line x1="-90" y1="0" x2="-50" y2="0" /> <!-- 左 -->
+                        <line x1="-63.64" y1="-63.64" x2="-35.36" y2="-35.36" /> <!-- 左上 -->
+                        <!-- 塗りフィルター -->
+                        <path class="svg-fill" id="outsvg-fill-03" d="" fill="#CD5C5C" fill-opacity="0.5"></path>
+                    </g>
+          
+                <!-- 内側の円グラフ（半径50）-->
+                <circle cx="0" cy="0" r="50" fill="white" stroke="#333" stroke-width="1" />
+                    <g fill="none" stroke="#333" stroke-width="1">
+                        <line x1="0" y1="-50" x2="0" y2="0" /> <!-- 上 -->
+                        <line x1="35.36" y1="-35.36" x2="0" y2="0" /> <!-- 右上 -->
+                        <line x1="50" y1="0" x2="0" y2="0" /> <!-- 右 -->
+                        <line x1="35.36" y1="35.36" x2="0" y2="0" /> <!-- 右下 -->
+                        <line x1="0" y1="50" x2="0" y2="0" /> <!-- 下 -->
+                        <line x1="-35.36" y1="35.36" x2="0" y2="0" /> <!-- 左下 -->
+                        <line x1="-50" y1="0" x2="0" y2="0" /> <!-- 左 -->
+                        <line x1="-35.36" y1="-35.36" x2="0" y2="0" /> <!-- 左上 -->
+                        <!-- 塗りフィルター -->
+                        <path class="svg-fill" id="insvg-fill-03" d="" fill="#CD5C5C" fill-opacity="0.5"></path>
+                    </g>
+                <!-- ポジション -->
+                <text id="positionLabelAns03" class="position-name position-name--blue" x="-18" y="-37">MT</text>
+            </g>
+        </svg>
+    </div>
+    <div class="answer-container__item">
+        <label>4回目</label>
+        <input type="radio" name="div4" value="外" checked="checked"> 外
+        <input type="radio" name="div4" value="中"> 中
+        <p id="answer04">結果： -</p>
+        <svg width="200" height="200" viewBox="0 0 200 200">
+            <!-- 円グラフを中央に配置 -->
+            <g transform="translate(100,100)">
+        
+                <!-- 外側の円グラフ（半径90）-->
+                <circle cx="0" cy="0" r="90" fill="white" stroke="#333" stroke-width="1" />
+                    <g fill="none" stroke="#333" stroke-width="1">
+                        <line x1="0" y1="-90" x2="0" y2="-50" /> <!-- 上 -->
+                        <line x1="63.64" y1="-63.64" x2="35.36" y2="-35.36" /> <!-- 右上 -->
+                        <line x1="90" y1="0" x2="50" y2="0" /> <!-- 右 -->
+                        <line x1="63.64" y1="63.64" x2="35.36" y2="35.36" /> <!-- 右下 -->
+                        <line x1="0" y1="90" x2="0" y2="50" /> <!-- 下 -->
+                        <line x1="-63.64" y1="63.64" x2="-35.36" y2="35.36" /> <!-- 左下 -->
+                        <line x1="-90" y1="0" x2="-50" y2="0" /> <!-- 左 -->
+                        <line x1="-63.64" y1="-63.64" x2="-35.36" y2="-35.36" /> <!-- 左上 -->
+                        <!-- 塗りフィルター -->
+                        <path class="svg-fill" id="outsvg-fill-04" d="" fill="#CD5C5C" fill-opacity="0.5"></path>
+                    </g>
+          
+                <!-- 内側の円グラフ（半径50）-->
+                <circle cx="0" cy="0" r="50" fill="white" stroke="#333" stroke-width="1" />
+                    <g fill="none" stroke="#333" stroke-width="1">
+                        <line x1="0" y1="-50" x2="0" y2="0" /> <!-- 上 -->
+                        <line x1="35.36" y1="-35.36" x2="0" y2="0" /> <!-- 右上 -->
+                        <line x1="50" y1="0" x2="0" y2="0" /> <!-- 右 -->
+                        <line x1="35.36" y1="35.36" x2="0" y2="0" /> <!-- 右下 -->
+                        <line x1="0" y1="50" x2="0" y2="0" /> <!-- 下 -->
+                        <line x1="-35.36" y1="35.36" x2="0" y2="0" /> <!-- 左下 -->
+                        <line x1="-50" y1="0" x2="0" y2="0" /> <!-- 左 -->
+                        <line x1="-35.36" y1="-35.36" x2="0" y2="0" /> <!-- 左上 -->
+                        <!-- 塗りフィルター -->
+                        <path class="svg-fill" id="insvg-fill-04" d="" fill="#CD5C5C" fill-opacity="0.5"></path>
+                    </g>
+                <!-- ポジション -->
+                <text id="positionLabelAns04" class="position-name position-name--blue" x="-18" y="-37">MT</text>
+            </g>
+        </svg>
+    </div>
+    </div>
+    <!--確認用-->
+    <button class="answer-button" id="checkBtn">回答チェック</button>
+    </section>
+    </main>
+    <footer>
+        <p>何か連絡あればTwitterにでもコメントください。まとめサイトおよび匿名掲示板への引用・転載はご遠慮ください。</p>
+    </footer>
+</body>
+
+</html>
