@@ -208,6 +208,9 @@ generate
   fill: #E07192 !important;
 }
 
+footer {
+  margin-bottom: 40px;
+}
 footer p {
   font-size: 12px;
 }
