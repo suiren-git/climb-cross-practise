@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-
     /* ------------------------------------------
         問題作成用
     ------------------------------------------ */
@@ -18,11 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
         "2_近近": { div1: "中", div2: "外", div3: "外", div4: "中" },
         "2_近遠": { div1: "中", div2: "中", div3: "外", div4: "外" },
     };
-
-    /* 8種類のデータからパターン取得
-    ------------------------------------------ */
-    let activePattern = null; // 現在アクティブなパターン
-
 
     /* ポジション用
     ------------------------------------------ */
@@ -97,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             console.warn("generate01 のテキストが想定外:", selectedText);
         }
-        console.log(flag);
     
         /* 値を取得する
         ------------------------------------------ */
@@ -200,7 +193,6 @@ document.addEventListener("DOMContentLoaded", function () {
         for (let i = 1; i <= 4; i++) {
             const label = document.getElementById(`positionLabelAns0${i}`);
             const radioValue = document.querySelector(`input[name="div${i}"]:checked`).value;
-            console.log(radioValue);
     
           /* ------ 対応するロールの移動量を取得 ------ */
             const move = moveAmounts[selectedPosition][radioValue];
@@ -210,59 +202,6 @@ document.addEventListener("DOMContentLoaded", function () {
             label.textContent = selectedPosition;
         }
       });
-
-    /* ------------------------------------------
-        回答チェック処理
-    ------------------------------------------ */
-    document.getElementById("checkBtn").addEventListener("click", function () {
-        let score = 0;
-
-        /* ユーザーが選択したラジオボタンの値を取得
-        ------------------------------------------ */
-        const userAnswers = {
-            div1: document.querySelector(`input[name="div1"]:checked`),
-            div2: document.querySelector(`input[name="div2"]:checked`),
-            div3: document.querySelector(`input[name="div3"]:checked`),
-            div4: document.querySelector(`input[name="div4"]:checked`),
-        };
-
-        /* 結果表示用の要素を取得
-        ------------------------------------------ */
-        const generateElements = {
-            div1: document.getElementById("answer01"),
-            div2: document.getElementById("answer02"),
-            div3: document.getElementById("answer03"),
-            div4: document.getElementById("answer04"),
-        };
-
-        /* 現在の正解パターンを取得
-        ------------------------------------------ */
-        /* ------ 値を取得する ------ */
-        const generate02 = document.getElementById("generate02");
-        const generate03 = document.getElementById("generate03");
-        
-        const generate02Label = generate02.querySelector(".label").textContent;
-        const generate03Label = generate03.querySelector(".label").textContent;
-        const key = `${flag}_${generate02Label}${generate03Label}`;
-        const correctSet = correctAnswers[key];
-
-
-        /* 回答チェックと結果表示
-        ------------------------------------------ */
-        for (let key in userAnswers) {
-            if (userAnswers[key]) {
-                if (userAnswers[key].value === correctSet[key]) {
-                    score++;
-                    generateElements[key].textContent = `結果: 〇`;
-                } else {
-                    generateElements[key].textContent = `結果: ×`;
-                }
-            } else {
-                generateElements[key].textContent = `結果: 未選択`;
-                generateElements[key].style.color = "black"; // 未選択: 黒
-            }
-        }
-    });
 
     /* ------------------------------------------
         SVG色変更
@@ -295,7 +234,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* SVG塗りつぶし更新
     ------------------------------------------ */
-    function updateSVGFill() {
+    function updateSVGFill(flipPattern = [false, false, false,false]) {
         const team = getTeamFromSelect();
 
         /* ------ パターン定義。true＝上 false＝下 ------ */
@@ -306,27 +245,126 @@ document.addEventListener("DOMContentLoaded", function () {
         "2-2": [false, true, false, true],
         };
 
-        const pattern = patternMap[`${flag}-${team}`];
+        let pattern = patternMap[`${flag}-${team}`];
 
         pattern.forEach((isTop, i) => {
+            const original = isTop;
+            const flip = flipPattern?.[i] || false;  // 反転フラグがあるかチェック
+            const adjusted = flip ? !original : original;
+
+
+
+
+            /* ------ 処理 ------ */
             const svgNum = String(i + 1).padStart(2,'0');
             const inPath = document.getElementById(`insvg-fill-${svgNum}`);
             const outPath = document.getElementById(`outsvg-fill-${svgNum}`);
 
             if (inPath) {
-                inPath.setAttribute("d", getInnerPath(isTop));
+                inPath.setAttribute("d", getInnerPath(adjusted));
             }
-
+        
             if (outPath) {
-                outPath.setAttribute("d", getPath(isTop));
+                outPath.setAttribute("d", getPath(adjusted));
             }
         });
     }
 
-    /* 実行用
+    /* ------------------------------------------
+        回答チェック処理
     ------------------------------------------ */
-    document.getElementById('checkBtn').addEventListener('click', () => {
-        updateSVGFill();
+    document.getElementById("checkBtn").addEventListener("click", function () {
+        let score = 0;
+        /* 現在の正解パターンを取得
+        ------------------------------------------ */
+        /* ------ 値を取得する ------ */
+        const generate02 = document.getElementById("generate02");
+        const generate03 = document.getElementById("generate03");
+        
+        const generate02Label = generate02.querySelector(".label").textContent;
+        const generate03Label = generate03.querySelector(".label").textContent;
+        const key = `${flag}_${generate02Label}${generate03Label}`;
+        const correctSet = correctAnswers[key];
+
+        /* ユーザーが選択したラジオボタンの値を取得
+        ------------------------------------------ */
+        for (let j = 1; j <= 4; j++) {  // 変数名を j に変更
+            const div = document.querySelector(`input[name="div${j}"]:checked`);
+            if (!div) {
+                document.querySelector(`input[name="div${j}"]:first-child`).checked = true;
+            }
+        }
+        const userAnswers = {
+            div1: document.querySelector(`input[name="div1"]:checked`),
+            div2: document.querySelector(`input[name="div2"]:checked`),
+            div3: document.querySelector(`input[name="div3"]:checked`),
+            div4: document.querySelector(`input[name="div4"]:checked`),
+        };
+        
+
+        // ▼そのあとに flipPattern を生成
+        const flipPattern = Object.entries(userAnswers).map(([key, answer]) => {
+            const correct = correctSet[key];
+            return flag === 2 && answer && answer.value !== correct;
+        });
+
+
+        
+
+        /* 結果表示用の要素を取得
+        ------------------------------------------ */
+        const generateElements = {
+            div1: document.getElementById("answer01"),
+            div2: document.getElementById("answer02"),
+            div3: document.getElementById("answer03"),
+            div4: document.getElementById("answer04"),
+        };
+
+        /* ------ 既存の.note-textをすべて削除 ------ */
+        document.querySelectorAll(".note-text").forEach(el => el.remove());
+
+
+        /* ------ div1～div4割り振り用 ------ */
+        let i = 0;
+
+
+        /* 回答チェックと結果表示
+        ------------------------------------------ */
+        for (let key in userAnswers) {
+            const resultElement = generateElements[key];
+
+            if (userAnswers[key]) {
+                if (userAnswers[key].value === correctSet[key]) {
+                    score++;
+                    resultElement.textContent = `結果: 〇`;
+                } else {
+                    resultElement.textContent = `結果: ×`;
+                     // デバッグ用ログ
+                    /* ------ 補足用 ------ */
+                    const note = document.createElement("div");
+                    note.className = "note-text";
+                    if (key === "div1" && flag === 1) {
+                        note.textContent = "連続ドーナツ範囲中のためHP0になる確率大";
+                        resultElement.appendChild(note);
+                    } else if (flag === 2) {
+                        note.textContent = "自分or味方に二度付け禁止デバフが重なる確率大";
+                        resultElement.appendChild(note);
+                    }
+
+                    if (flag === 2) {
+                        flipPattern[i] = true;
+                    }
+                }
+            } else {
+                generateElements[key].textContent = `結果: 未選択`;
+                generateElements[key].style.color = "black";
+            }
+
+            i++;
+        }
+
+        /*---SVG塗りつぶし実行---*/
+        updateSVGFill(flipPattern);
     });
 
 });
