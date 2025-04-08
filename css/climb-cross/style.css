@@ -208,6 +208,18 @@ generate
   fill: #E07192 !important;
 }
 
+/*---塗フィルター用---*/
+.svg-fill {
+  pointer-events: none;
+}
+
+/*---解説用---*/
+.note-text {
+  font-size: 0.9rem;
+  color: #f4f6ed;
+  margin-top: 4px;
+}
+
 footer {
   margin-bottom: 40px;
 }
